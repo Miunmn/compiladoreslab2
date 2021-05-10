@@ -155,7 +155,7 @@ int main()
 {
 	fstream file_object;
 
-	string file_name = "dataejercicio1.txt";
+	string file_name = "entrada1.txt";
 
     read_data(file_object,file_name);
 

@@ -11,7 +11,7 @@ using relop = string;
 using id = string;
 using num = string;
 
-vector<string> operadores = {"<",">","==","(",")","{","}",";"};
+vector<string> operadores = {"<",">","==","(",")","{","}",";","="};
 vector<char> numeros = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 void dfa_relop(relop token_relop)
@@ -26,13 +26,30 @@ void dfa_relop(relop token_relop)
 			case '>':
 				temp += ">";
 				break;
+			case '{':
+				temp += "{";
+				break;
+			case '}':
+				temp += "}";
+				break;
+			case '(':
+				temp += "(";
+				break;
+			case ')':
+				temp += ")";
+				break;
+			case ';':
+				temp += ";";
+				break;
 			case '=':
 				if(i == 0 && token_relop == "=="){
 					temp += "==";
 					cout << "<REL_OP,'=='>" << endl;
 				}
-				else if(i == 1)
+				else if(i == 0)
+				{
 					temp += "=";
+				}
 				else
 					return;
 				break;
@@ -47,6 +64,18 @@ void dfa_relop(relop token_relop)
 			cout << "<REL_OP,'<'>" << endl;
 		else if(token_relop.size() == 1 && token_relop == ">")
 			cout << "<REL_OP,'>'>" << endl;
+		else if(token_relop.size() == 1 && token_relop == "{")
+			cout << "<REL_OP,'{'>" << endl;
+		else if(token_relop.size() == 1 && token_relop == "}")
+			cout << "<REL_OP,'}'>" << endl;
+		else if(token_relop.size() == 1 && token_relop == "(")
+			cout << "<REL_OP,'('>" << endl;
+		else if(token_relop.size() == 1 && token_relop == ")")
+			cout << "<REL_OP,')'>" << endl;
+		else if(token_relop.size() == 1 && token_relop == "=")
+			cout << "<REL_OP,')'>" << endl;
+		else if(token_relop.size() == 1 && token_relop == ";")
+			cout << "<REL_OP,';'>" << endl;
 		else if(token_relop.size() == 2 && token_relop == "<=")
 			cout << "<REL_OP,'<='>" << endl;
 		else
@@ -79,17 +108,23 @@ void dfa_num(num token_num)
 	vector<char> other = {'.', 'E', '+', '-'};	
 	for(int i = 1; i < token_num.size(); i++)
 	{
+		cout<<"NUMM"<<endl;
 		if(!((find(begin(numeros), end(numeros), token_num[i])) != (numeros.end())))
 		{
+			cout<<"NUMM1"<<endl;
 			return;
 		} else if(!((find(begin(other), end(other), token_num[i])) != ( other.end())))
 		{
+			cout<<"NUMM2"<<endl;
 			return;
 		} else if(token_num[i] == '.' && cont_dot == 0)
 		{
 			cont_dot++;
+			cout<<"NUMM3"<<endl;
+
 		} else if((token_num[i] == '+' || token_num[i] == '-') && flag == false)
 		{
+			cout<<"NUMM4"<<endl;
 			return;
 		} else if(token_num[i] == 'E')
 		{
@@ -97,7 +132,10 @@ void dfa_num(num token_num)
 		}
 		
 		if(cont_dot > 1)
+		{
+			cout<<"NUMM5"<<endl;
 			return;
+		}
 	}
 
 	cout << "<NUM," << token_num << ">" << endl;
@@ -117,7 +155,29 @@ void analisis(vector<string> &vector_)
 		}
 		else if ((find(begin(numeros), end(numeros), item[0])) != numeros.end())
 		{
-			dfa_num(item);			
+			//dfa_num(item);
+			string aux = item;
+			
+			istringstream iss(item);
+			istringstream ss(aux);
+			long long int num_int = 0;
+			double num_double = 0;
+			if(!(iss >> num_int).fail())
+			{
+				if (!(ss>> num_double).fail())
+				{
+					if (num_double>num_int)
+					{
+						cout << "<NUM," << num_double << ">" << endl;
+
+					}
+					else
+					{
+						cout << "<NUM," << num_int << ">" << endl;
+					}
+				}
+			}
+
 		}
 		else 
 		{

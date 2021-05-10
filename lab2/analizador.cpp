@@ -55,27 +55,7 @@ void dfa_relop(relop token_relop)
 	else
 		return;
 }
-/*
-bool presente_operadores(char token_char)
-{
-	for(int i = 0 ; i < operadores.size(); i ++)
-	{
-		if (operadores[i] == token_char)
-			return true;
-	}
-	return false;
-}
 
-bool presente_numeros(char token_num)
-{
-	for(int i = 0; i < numeros.size(); i++)
-	{
-		if(numeros[i] == token_num)
-			return true;
-	}
-	return false;
-}
-*/
 void dfa_id(id token_id)
 {   
 
@@ -84,8 +64,7 @@ void dfa_id(id token_id)
 		if (!(((int) token_id[i]  >=  65 && (int) token_id[i] <=90) || ((int) token_id[i]>= 97 && (int) token_id[i]<=122)))
 		{
       		if(!((find(begin(numeros), end(numeros), token_id[i])) !=numeros.end())){
-				//cout<<"(int) token_id[i]: "<< (int) token_id[i]<<endl;
-				//cout<<"token_id: "<<token_id[i]<<endl;
+				cout << "Caracter o token no soportado: " << token_id << endl;
 				return;
       		}
 		}
@@ -126,38 +105,18 @@ void dfa_num(num token_num)
 
 void analisis(vector<string> &vector_)
 {
-	/*
-	cout<<"Cadena a analizar: \n";
-	for(int i =0 ; i < vector_.size(); i++)
-	{
-		cout<<vector_[i]<<endl;
-	}
-	cout<<"\n";
-	cout<<"vector_.size(): "<<vector_.size()<<endl;
-	*/
     for (string item : vector_)
     {
-		//cout<<"item: "<<item<<endl;
-		//cout<<"(int) item[0]  "<<(int) item[0]  <<endl;
 		if (((int) item[0]  >=  65 && (int) item[0] <=90 ) || ((int) item[0]>= 97 && (int) item[0]<=122 ))
 		{
-			//printf("dfa_id");
-			cout<<item<<endl;
-			printf("\n");
 			dfa_id(item);
 		} 
 		else if ((find(begin(operadores), end(operadores), string(1,item[0]))) !=operadores.end())
 		{
-			//printf("dfa_relop");
-			cout<<item<<endl;
-			printf("\n");
 			dfa_relop(item);	
 		}
 		else if ((find(begin(numeros), end(numeros), item[0])) != numeros.end())
 		{
-			//printf("dfa_num");
-			cout<<item<<endl;
-			printf("\n");
 			dfa_num(item);			
 		}
 		else 

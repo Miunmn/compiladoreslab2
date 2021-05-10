@@ -1,3 +1,4 @@
-
-     int w = 3 
-     int hol2 = 5
+int main ( )
+{
+     < int w >  = 33 ;
+}

@@ -11,7 +11,7 @@ using relop = string;
 using id = string;
 using num = string;
 
-vector<string> operadores = {"<",">","=="};
+vector<string> operadores = {"<",">","==","(",")","{","}",";"};
 vector<char> numeros = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 void dfa_relop(relop token_relop)
@@ -84,8 +84,8 @@ void dfa_id(id token_id)
 		if (!(((int) token_id[i]  >=  65 && (int) token_id[i] <=90) || ((int) token_id[i]>= 97 && (int) token_id[i]<=122)))
 		{
       		if(!((find(begin(numeros), end(numeros), token_id[i])) !=numeros.end())){
-				cout<<"(int) token_id[i]: "<< (int) token_id[i]<<endl;
-				cout<<"token_id: "<<token_id[i]<<endl;
+				//cout<<"(int) token_id[i]: "<< (int) token_id[i]<<endl;
+				//cout<<"token_id: "<<token_id[i]<<endl;
 				return;
       		}
 		}
@@ -137,25 +137,25 @@ void analisis(vector<string> &vector_)
 	*/
     for (string item : vector_)
     {
-		cout<<"item: "<<item<<endl;
-		cout<<"(int) item[0]  "<<(int) item[0]  <<endl;
+		//cout<<"item: "<<item<<endl;
+		//cout<<"(int) item[0]  "<<(int) item[0]  <<endl;
 		if (((int) item[0]  >=  65 && (int) item[0] <=90 ) || ((int) item[0]>= 97 && (int) item[0]<=122 ))
 		{
-			printf("dfa_id");
+			//printf("dfa_id");
 			cout<<item<<endl;
 			printf("\n");
 			dfa_id(item);
 		} 
 		else if ((find(begin(operadores), end(operadores), string(1,item[0]))) !=operadores.end())
 		{
-			printf("dfa_relop");
+			//printf("dfa_relop");
 			cout<<item<<endl;
 			printf("\n");
 			dfa_relop(item);	
 		}
 		else if ((find(begin(numeros), end(numeros), item[0])) != numeros.end())
 		{
-			printf("dfa_num");
+			//printf("dfa_num");
 			cout<<item<<endl;
 			printf("\n");
 			dfa_num(item);			

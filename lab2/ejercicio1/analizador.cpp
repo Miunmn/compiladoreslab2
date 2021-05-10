@@ -65,17 +65,17 @@ void dfa_relop(relop token_relop)
 		else if(token_relop.size() == 1 && token_relop == ">")
 			cout << "<REL_OP,'>'>" << endl;
 		else if(token_relop.size() == 1 && token_relop == "{")
-			cout << "<REL_OP,'{'>" << endl;
+			cout << "<BRACES_BEGIN,'{'>" << endl;
 		else if(token_relop.size() == 1 && token_relop == "}")
-			cout << "<REL_OP,'}'>" << endl;
+			cout << "<BRACES_END,'}'>" << endl;
 		else if(token_relop.size() == 1 && token_relop == "(")
-			cout << "<REL_OP,'('>" << endl;
+			cout << "<PAR_BEGIN,'('>" << endl;
 		else if(token_relop.size() == 1 && token_relop == ")")
-			cout << "<REL_OP,')'>" << endl;
+			cout << "<PAR_END,')'>" << endl;
 		else if(token_relop.size() == 1 && token_relop == "=")
-			cout << "<REL_OP,')'>" << endl;
+			cout << "<ASSIGN,'='>" << endl;
 		else if(token_relop.size() == 1 && token_relop == ";")
-			cout << "<REL_OP,';'>" << endl;
+			cout << "<ENDOFLINE,';'>" << endl;
 		else if(token_relop.size() == 2 && token_relop == "<=")
 			cout << "<REL_OP,'<='>" << endl;
 		else
@@ -100,7 +100,7 @@ void dfa_id(id token_id)
 	}
 	cout << "<ID," << token_id << ">" << endl;
 }
-
+/*
 void dfa_num(num token_num)
 {
 	int cont_dot = 0;
@@ -137,10 +137,9 @@ void dfa_num(num token_num)
 			return;
 		}
 	}
-
 	cout << "<NUM," << token_num << ">" << endl;
 }
-
+*/
 void analisis(vector<string> &vector_)
 {
     for (string item : vector_)
@@ -155,9 +154,7 @@ void analisis(vector<string> &vector_)
 		}
 		else if ((find(begin(numeros), end(numeros), item[0])) != numeros.end())
 		{
-			//dfa_num(item);
-			string aux = item;
-			
+			string aux = item;			
 			istringstream iss(item);
 			istringstream ss(aux);
 			long long int num_int = 0;

@@ -8,7 +8,7 @@ FILE *yyin;
 %option yylineno
 
 
-DIGITO [0-9]
+DIGITO [0-1000000000000]
 LETRA [a-zA-Z]
 ESPACIO [" "]
 INI_COMENTARIO ["/*"]

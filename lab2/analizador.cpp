@@ -81,24 +81,13 @@ void dfa_id(id token_id)
 
     for (int i = 1 ; i < token_id.size(); i++)
     {
-		if (
-            ( 
-                !(
-                    (int) token_id[i]  >=  65 && (int) token_id[i] <=90 
-                ) 
-                ||
-                !(
-                    (int) token_id[i]>= 97 && (int) token_id[i]<=122 
-                )
-            ) 
-                ||
-            !((find(begin(numeros), end(numeros), token_id[i])) !=numeros.end())
-            )
+		if (!(((int) token_id[i]  >=  65 && (int) token_id[i] <=90) || ((int) token_id[i]>= 97 && (int) token_id[i]<=122)))
 		{
-            cout<<"(int) token_id[i]: "<< (int) token_id[i]<<endl;
-            cout<<"token_id: "<<token_id[i]<<endl;
-            cout<<"if 1 "<<endl;
-            return;
+      		if(!((find(begin(numeros), end(numeros), token_id[i])) !=numeros.end())){
+				cout<<"(int) token_id[i]: "<< (int) token_id[i]<<endl;
+				cout<<"token_id: "<<token_id[i]<<endl;
+				return;
+      		}
 		}
 	}
 	cout << "<ID," << token_id << ">" << endl;
@@ -137,7 +126,7 @@ void dfa_num(num token_num)
 
 void analisis(vector<string> &vector_)
 {
-	
+	/*
 	cout<<"Cadena a analizar: \n";
 	for(int i =0 ; i < vector_.size(); i++)
 	{
@@ -145,6 +134,7 @@ void analisis(vector<string> &vector_)
 	}
 	cout<<"\n";
 	cout<<"vector_.size(): "<<vector_.size()<<endl;
+	*/
     for (string item : vector_)
     {
 		cout<<"item: "<<item<<endl;
@@ -175,7 +165,6 @@ void analisis(vector<string> &vector_)
 			cout<<"Caracter o token no soportado: " << item << endl;
 			continue;	
 		}	
-		cout<<"heyyy"<<endl;
 		
     }
 }

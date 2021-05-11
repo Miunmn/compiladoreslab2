@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 FILE *yyin;
+int number_lines = 1;
 %}
 
 %option noyywrap
 %option yylineno
 
 
-DIGITO [0-1000000000000]
+DIGITO [0-9]
 LETRA [a-zA-Z]
 ESPACIO [" "]
 INI_COMENTARIO ["/*"]
@@ -83,13 +84,21 @@ WRITE "write"|"WRITE"
 {OP_MENOR} {printf("<REL_OP,'<'> ");}
 {OP_MAYORIGUAL} {printf("<REL_OP,'>='> ");}
 {OP_MENORIGUAL} {printf("<REL_OP,'<='> ");}
+{OP_COMP_IGUAL} {printf("<REL_OP,'=='> ");} 
+{OP_NEGACION} {printf("<NEGATION> ");}
+{OP_DISTINTO} {printf("<DISTINCT> ");}
 {FIN_SENTENCIA} {printf("<ENDOFSENTENCE> ");}
+{OP_DOSPUNTOS} {printf("<TWOPOINTS> ");}
 
-
-{DIGITO} {printf("<NUMBER,%s> ", yytext);}
+{CONST_INTEGER} {printf("<NUMBER,%s> ", yytext);}
+{CONST_FLOAT} {printf("<NUMBER,%s> ", yytext);}
 {IDENTIFICADOR} {printf("<ID,%s> ", yytext);}
 
-
-"." {printf("\nCaracter no soportado: %s ...", yytext);};
+\n number_lines++;
+"." {printf("\nError en línea %d, caracter '%s' no soportado ", number_lines, yytext);}
+"@" {printf("\nError en línea %d, caracter '%s' no soportado ", number_lines, yytext);}
+"#" {printf("\nError en línea %d, caracter '%s' no soportado ", number_lines, yytext);}
+"$" {printf("\nError en línea %d, caracter '%s' no soportado ", number_lines, yytext);}
+"Ç" {printf("\nError en línea %d, caracter '%s' no soportado ", number_lines, yytext);}
 
 %%

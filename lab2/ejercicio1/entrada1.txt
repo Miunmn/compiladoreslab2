@@ -1,5 +1,8 @@
 int main ( )
 {
-    int w   = 312323134322;
-    @
+    int id = 23;
+    if ( 2 == id) 
+    {
+        cout << "hola" << endl;
+    }
 }
